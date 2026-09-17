@@ -34,8 +34,8 @@ export const signUp=async (req,res)=>{
         let token = await genToken(user._id)
         res.cookie("token",token,{
             httpOnly:true,
-            secure:false,
-            sameSite: "Strict",
+            secure:true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         return res.status(201).json(user)
@@ -60,8 +60,8 @@ export const login=async(req,res)=>{
         let token =await genToken(user._id)
         res.cookie("token",token,{
             httpOnly:true,
-            secure:false,
-            sameSite: "Strict",
+            secure:true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         return res.status(200).json(user)
@@ -97,8 +97,8 @@ export const googleSignup = async (req,res) => {
         let token =await genToken(user._id)
         res.cookie("token",token,{
             httpOnly:true,
-            secure:false,
-            sameSite: "Strict",
+            secure:true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         return res.status(200).json(user)
@@ -122,7 +122,7 @@ export const sendOtp = async (req,res) => {
 
         user.resetOtp=otp,
         user.otpExpires=Date.now() + 5*60*1000,
-        user.isOtpVerifed= false 
+        user.isOtpVerifed= true 
 
         await user.save()
         await sendMail(email,otp)

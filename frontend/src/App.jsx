@@ -38,7 +38,6 @@ function App() {
   getAllReviews()
   return (
     <>
-    
       <ToastContainer />
       <ScrollToTop/>
       <Routes>
