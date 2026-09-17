@@ -13,10 +13,15 @@ dotenv.config()
 
 let port = process.env.PORT
 let app = express()
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://learnable.pratikdubey.dev",
+  "https://learnable-pxx2.onrender.com"
+];
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin:"https://learnable-pxx2.onrender.com/",
+    origin:allowedOrigins,
     credentials:true
 }))
 app.use("/api/auth", authRouter)
